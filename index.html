@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Amith Gowda — Full-Stack Developer</title>
+<meta name="description" content="Computer Science student building practical full-stack applications. Bengaluru, India." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-elev: #12121a;
+    --border: #1f1f2e;
+    --text: #e6e6f0;
+    --muted: #8b8ba7;
+    --accent: #6c63ff;
+    --accent-2: #00bcd4;
+    --accent-3: #ff6b35;
+    --radius: 14px;
+    --max: 1080px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  /* Ambient glow */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(40px);
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* Nav */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(10,10,15,0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* Hero */
+  header { padding: 100px 0 80px; }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    padding: 6px 14px;
+    border-radius: 99px;
+    margin-bottom: 28px;
+  }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  h1 .grad {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 36px;
+  }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: #5a52e0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(108,99,255,0.35);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Section */
+  section { padding: 70px 0; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 40px;
+  }
+
+  /* Projects */
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .project {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  }
+  .project:hover::before { opacity: 1; }
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .project h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+  .arrow { color: var(--muted); transition: all 0.2s; font-size: 1.2rem; }
+  .project:hover .arrow { color: var(--accent); transform: translate(3px, -3px); }
+  .project p { color: var(--muted); font-size: 0.92rem; margin-bottom: 20px; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(108,99,255,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(108,99,255,0.25);
+  }
+  .tag.alt { background: rgba(0,188,212,0.1); color: var(--accent-2); border-color: rgba(0,188,212,0.25); }
+  .tag.warm { background: rgba(255,107,53,0.1); color: var(--accent-3); border-color: rgba(255,107,53,0.25); }
+
+  /* Stack */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .stack-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .stack-card h4 {
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  .stat {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* Contact */
+  .contact-box {
+    background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(0,188,212,0.06));
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 56px 40px;
+    text-align: center;
+  }
+  .contact-box h2 { margin-bottom: 16px; }
+  .contact-box p { color: var(--muted); max-width: 480px; margin: 0 auto 32px; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-dot"></span>Amith Gowda</div>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header>
+    <div class="status"><span class="status-dot"></span>Open to internships</div>
+    <h1>Building <span class="grad">practical</span> software<br/>that solves real problems.</h1>
+    <p class="lede">Computer Science student based in Bengaluru. Full-stack developer exploring systems-level programming, privacy-first AI, and data-driven platforms.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/amithgowda-m" target="_blank" rel="noopener">
+        View GitHub →
+      </a>
+      <a class="btn btn-ghost" href="mailto:amithgowdasmg@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="https://drive.google.com/file/d/1Ud2UP9_cDQiQJzudJI_DhhbS-9E8Edfp/view?usp=drive_link" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </header>
+
+  <section id="work" class="reveal">
+    <div class="section-label">01 — Selected work</div>
+    <h2>Projects</h2>
+    <div class="projects">
+      <a class="project" href="https://github.com/amithgowda-m/AaharAI" target="_blank" rel="noopener">
+        <div class="project-head">
+          <h3>AaharAI</h3>
+          <span class="arrow">↗</span>
+        </div>
+        <p>Privacy-first AI nutrition tracker. Track food habits securely with AI-powered insights — no data leaves your device.</p>
+        <div class="tags">
+          <span class="tag">AI</span>
+          <span class="tag alt">Privacy</span>
+          <span class="tag warm">Full-Stack</span>
+        </div>
+      </a>
+      <a class="project" href="https://github.com/amithgowda-m/SowWell" target="_blank" rel="noopener">
+        <div class="project-head">
+          <h3>SowWell</h3>
+          <span class="arrow">↗</span>
+        </div>
+        <p>Intelligent agriculture platform. Real-time insights and data-driven recommendations to help farmers make better decisions.</p>
+        <div class="tags">
+          <span class="tag warm">Data</span>
+          <span class="tag alt">Real-time</span>
+          <span class="tag">Full-Stack</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="stack" class="reveal">
+    <div class="section-label">02 — Toolkit</div>
+    <h2>Tech stack</h2>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <h4>Languages</h4>
+        <div class="chips">
+          <span class="chip">C</span><span class="chip">C++</span><span class="chip">Python</span>
+          <span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">SQL</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>Web &amp; Mobile</h4>
+        <div class="chips">
+          <span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Express</span>
+          <span class="chip">MongoDB</span><span class="chip">Flutter</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>Focus</h4>
+        <div class="chips">
+          <span class="chip">Full-Stack</span><span class="chip">Architecture</span><span class="chip">Systems</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="section-label">03 — By the numbers</div>
+    <h2>Stats</h2>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">2+</div><div class="stat-label">Shipped projects</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Languages</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Frameworks</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Curiosity</div></div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <div class="contact-box">
+      <div class="section-label" style="justify-content:center;">04 — Contact</div>
+      <h2>Let's build something.</h2>
+      <p>Open to internships, open-source collaboration, and hackathons. Reach out — I reply fast.</p>
+      <div class="cta-row" style="justify-content:center;">
+        <a class="btn btn-primary" href="mailto:amithgowdasmg@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/amith-gowda-m" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Amith Gowda · Built with plain HTML &amp; CSS · <a href="https://github.com/amithgowda-m" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
